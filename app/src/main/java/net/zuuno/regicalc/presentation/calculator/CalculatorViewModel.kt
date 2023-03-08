@@ -6,6 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
+import net.zuuno.regicalc.presentation.calculator.util.Shopping
+import net.zuuno.regicalc.presentation.calculator.util.totalPrice
+import java.time.LocalDateTime
+import java.util.*
 
 class CalculatorViewModel : ViewModel() {
 
@@ -22,6 +26,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.DoubleZero -> enterDoubleZero()
             is CalculatorAction.Operation -> enterOperation(action.operation)
             is CalculatorAction.Decimal -> enterDecimal()
+            is CalculatorAction.Add -> performAddition()
             is CalculatorAction.Clear -> performClear()
             is CalculatorAction.Delete -> performDeletion()
         }
@@ -79,6 +84,27 @@ class CalculatorViewModel : ViewModel() {
             }
             else -> uiState
         }
+    }
+
+    private fun performAddition() {
+        if (uiState.price.isBlank()) {
+            return
+        }
+
+        val newShopping = Shopping(
+            id = UUID.randomUUID().toString(),
+            price = uiState.price.toDoubleOrNull() ?: 0.0,
+            quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1,
+            createdAt = LocalDateTime.now()
+        )
+
+        uiState = uiState.copy(
+            price = "",
+            quantity = "",
+            operation = null,
+            shoppingList = (uiState.shoppingList + newShopping).sortedByDescending { it.createdAt },
+            totalPrice = (uiState.shoppingList + newShopping).sumOf { it.totalPrice() }
+        )
     }
 
     private fun performClear() {

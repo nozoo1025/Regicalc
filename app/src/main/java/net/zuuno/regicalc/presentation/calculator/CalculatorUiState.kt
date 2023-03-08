@@ -2,11 +2,14 @@ package net.zuuno.regicalc.presentation.calculator
 
 import net.zuuno.regicalc.presentation.calculator.CalculatorViewModel.Companion.MAX_NUMBER_LENGTH
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
+import net.zuuno.regicalc.presentation.calculator.util.Shopping
 
 data class CalculatorUiState(
     val price: String = "",
     val quantity: String = "",
-    val operation: CalculatorOperation? = null
+    val operation: CalculatorOperation? = null,
+    val totalPrice: Double = 0.0,
+    val shoppingList: List<Shopping> = emptyList()
 )
 
 fun CalculatorUiState.isPriceInput(): Boolean {

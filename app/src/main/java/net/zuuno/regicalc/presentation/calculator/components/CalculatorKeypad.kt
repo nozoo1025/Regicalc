@@ -133,7 +133,9 @@ fun CalculatorKeypad(
             ),
             Button(
                 content = CalculatorButtonContent.IconContent(Icons.Default.PlaylistAdd),
-                onClick = { /*TODO*/ },
+                onClick = {
+                    onAction(CalculatorAction.Add)
+                },
                 buttonStyle = CalculatorButtonStyle.PrimaryColor
             )
         )

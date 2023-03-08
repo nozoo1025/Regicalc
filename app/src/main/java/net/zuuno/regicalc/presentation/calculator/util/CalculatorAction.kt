@@ -5,6 +5,7 @@ sealed interface CalculatorAction {
     object DoubleZero : CalculatorAction
     data class Operation(val operation: CalculatorOperation) : CalculatorAction
     object Decimal : CalculatorAction
+    object Add : CalculatorAction
     object Clear : CalculatorAction
     object Delete : CalculatorAction
 }
