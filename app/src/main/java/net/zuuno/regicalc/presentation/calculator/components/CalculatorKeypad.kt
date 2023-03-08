@@ -124,7 +124,12 @@ fun CalculatorKeypad(
                     onAction(CalculatorAction.DoubleZero)
                 }
             ),
-            Button(CalculatorButtonContent.TextContent("."), { /*TODO*/ }),
+            Button(
+                content = CalculatorButtonContent.TextContent("."),
+                onClick = {
+                    onAction(CalculatorAction.Decimal)
+                }
+            ),
             Button(
                 content = CalculatorButtonContent.IconContent(Icons.Default.PlaylistAdd),
                 onClick = { /*TODO*/ },
