@@ -34,12 +34,10 @@ class CalculatorViewModel : ViewModel() {
 
         uiState = when {
             uiState.isPriceInput() -> {
-                val newPrice = "${uiState.price}$number".toIntOrNull() ?: 0
-                uiState.copy(price = newPrice.toString())
+                uiState.copy(price = "${uiState.price}$number")
             }
             uiState.isQuantityInput() -> {
-                val newQuantity = "${uiState.quantity}$number".toIntOrNull() ?: 0
-                uiState.copy(quantity = newQuantity.toString())
+                uiState.copy(quantity = "${uiState.quantity}$number")
             }
             else -> uiState
         }
