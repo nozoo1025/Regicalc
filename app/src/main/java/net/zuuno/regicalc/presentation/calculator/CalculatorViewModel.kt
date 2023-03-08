@@ -50,24 +50,8 @@ class CalculatorViewModel : ViewModel() {
             return
         }
 
-        uiState = when {
-            uiState.isPriceInput() -> {
-                val newPrice = ("${uiState.price}00".toIntOrNull() ?: 0).toString()
-                if (newPrice.length > MAX_NUMBER_LENGTH) {
-                    uiState.copy(price = newPrice.substring(0, MAX_NUMBER_LENGTH))
-                } else {
-                    uiState.copy(price = newPrice)
-                }
-            }
-            uiState.isQuantityInput() -> {
-                val newQuantity = ("${uiState.quantity}00".toIntOrNull() ?: 0).toString()
-                if (newQuantity.length > MAX_NUMBER_LENGTH) {
-                    uiState.copy(quantity = newQuantity.substring(0, MAX_NUMBER_LENGTH))
-                } else {
-                    uiState.copy(quantity = newQuantity)
-                }
-            }
-            else -> uiState
+        repeat(2) {
+            enterNumber(0)
         }
     }
 
