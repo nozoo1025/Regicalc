@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 
 private sealed class CalculatorButtonContent {
     data class TextContent(val text: String) : CalculatorButtonContent()
@@ -25,13 +26,29 @@ private data class Button(
 
 @Composable
 fun CalculatorKeypad(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onAction: (CalculatorAction) -> Unit
 ) {
     val calculatorButtons = listOf(
         listOf(
-            Button(CalculatorButtonContent.TextContent("7"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("8"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("9"), { /*TODO*/ }),
+            Button(
+                content = CalculatorButtonContent.TextContent("7"),
+                onClick = {
+                    onAction(CalculatorAction.Number(7))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("8"),
+                onClick = {
+                    onAction(CalculatorAction.Number(8))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("9"),
+                onClick = {
+                    onAction(CalculatorAction.Number(9))
+                }
+            ),
             Button(
                 content = CalculatorButtonContent.TextContent("AC"),
                 onClick = { /*TODO*/ },
@@ -39,9 +56,24 @@ fun CalculatorKeypad(
             )
         ),
         listOf(
-            Button(CalculatorButtonContent.TextContent("4"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("5"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("6"), { /*TODO*/ }),
+            Button(
+                content = CalculatorButtonContent.TextContent("4"),
+                onClick = {
+                    onAction(CalculatorAction.Number(4))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("5"),
+                onClick = {
+                    onAction(CalculatorAction.Number(5))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("6"),
+                onClick = {
+                    onAction(CalculatorAction.Number(6))
+                }
+            ),
             Button(
                 content = CalculatorButtonContent.IconContent(Icons.Default.Backspace),
                 onClick = { /*TODO*/ },
@@ -49,18 +81,45 @@ fun CalculatorKeypad(
             )
         ),
         listOf(
-            Button(CalculatorButtonContent.TextContent("1"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("2"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("3"), { /*TODO*/ }),
+            Button(
+                content = CalculatorButtonContent.TextContent("1"),
+                onClick = {
+                    onAction(CalculatorAction.Number(1))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("2"),
+                onClick = {
+                    onAction(CalculatorAction.Number(2))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("3"),
+                onClick = {
+                    onAction(CalculatorAction.Number(3))
+                }
+            ),
             Button(
                 content = CalculatorButtonContent.TextContent("×"),
-                onClick = { /*TODO*/ },
+                onClick = {
+                          onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
+                },
                 buttonStyle = CalculatorButtonStyle.SecondaryColor
             )
         ),
         listOf(
-            Button(CalculatorButtonContent.TextContent("0"), { /*TODO*/ }),
-            Button(CalculatorButtonContent.TextContent("00"), { /*TODO*/ }),
+            Button(
+                content = CalculatorButtonContent.TextContent("0"),
+                onClick = {
+                    onAction(CalculatorAction.Number(0))
+                }
+            ),
+            Button(
+                content = CalculatorButtonContent.TextContent("00"),
+                onClick = {
+                    onAction(CalculatorAction.DoubleZero)
+                }
+            ),
             Button(CalculatorButtonContent.TextContent("."), { /*TODO*/ }),
             Button(
                 content = CalculatorButtonContent.IconContent(Icons.Default.PlaylistAdd),
