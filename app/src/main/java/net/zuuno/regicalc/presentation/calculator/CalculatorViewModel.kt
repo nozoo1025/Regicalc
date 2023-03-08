@@ -4,10 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
-import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
-import net.zuuno.regicalc.presentation.calculator.util.Shopping
-import net.zuuno.regicalc.presentation.calculator.util.totalPrice
+import net.zuuno.regicalc.presentation.calculator.util.*
 import java.util.*
 
 class CalculatorViewModel : ViewModel() {
@@ -28,6 +25,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Add -> performAddition()
             is CalculatorAction.Clear -> performClear()
             is CalculatorAction.Delete -> performDeletion()
+            is CalculatorAction.SetTaxRate -> setTaxRate(action.taxRate, action.shoppingId)
         }
     }
 
@@ -116,5 +114,23 @@ class CalculatorViewModel : ViewModel() {
             uiState.price.isNotBlank() -> uiState.copy(price = uiState.price.dropLast(1))
             else -> uiState
         }
+    }
+
+    private fun setTaxRate(taxRate: TaxRate, shoppingId: String) {
+        val shoppingList = uiState.shoppingList.map {
+            if (it.id == shoppingId) {
+                if (it.taxRate == taxRate) {
+                    it.copy(taxRate = TaxRate.None)
+                } else {
+                    it.copy(taxRate = taxRate)
+                }
+            } else {
+                it
+            }
+        }
+        uiState = uiState.copy(
+            shoppingList = shoppingList,
+            totalPrice = shoppingList.sumOf { it.totalPrice() }
+        )
     }
 }
