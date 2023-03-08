@@ -39,7 +39,7 @@ fun CalculatorShoppingItem(
             verticalAlignment = Alignment.Bottom
         ) {
             Text(
-                text = shopping.price.toString(),
+                text = "%.1f".format(shopping.price),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.headlineMedium
             )

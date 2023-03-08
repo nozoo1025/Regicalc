@@ -38,7 +38,7 @@ fun CalculatorResult(
         }
         Row {
             Text(
-                text = "¥ $totalPrice",
+                text = "¥ ${"%.1f".format(totalPrice)}",
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.displayMedium
             )
