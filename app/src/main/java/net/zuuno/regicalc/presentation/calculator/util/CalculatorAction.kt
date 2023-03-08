@@ -1,6 +1,4 @@
-package net.zuuno.regicalc.presentation.calculator.components
-
-import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
+package net.zuuno.regicalc.presentation.calculator.util
 
 sealed interface CalculatorAction {
     data class Number(val value: Int) : CalculatorAction

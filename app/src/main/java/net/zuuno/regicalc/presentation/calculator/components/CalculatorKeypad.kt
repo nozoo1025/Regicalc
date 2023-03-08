@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 
 private sealed class CalculatorButtonContent {
