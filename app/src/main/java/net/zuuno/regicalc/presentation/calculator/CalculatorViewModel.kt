@@ -21,6 +21,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Number -> enterNumber(action.value)
             is CalculatorAction.DoubleZero -> enterDoubleZero()
             is CalculatorAction.Operation -> enterOperation(action.operation)
+            is CalculatorAction.Clear -> performClear()
         }
     }
 
@@ -74,5 +75,9 @@ class CalculatorViewModel : ViewModel() {
         }
 
         uiState = uiState.copy(operation = operation)
+    }
+
+    private fun performClear() {
+        uiState = CalculatorUiState()
     }
 }

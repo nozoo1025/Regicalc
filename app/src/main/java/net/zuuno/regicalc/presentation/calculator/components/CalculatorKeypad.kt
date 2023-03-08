@@ -51,7 +51,9 @@ fun CalculatorKeypad(
             ),
             Button(
                 content = CalculatorButtonContent.TextContent("AC"),
-                onClick = { /*TODO*/ },
+                onClick = {
+                    onAction(CalculatorAction.Clear)
+                },
                 buttonStyle = CalculatorButtonStyle.TertiaryColor
             )
         ),
