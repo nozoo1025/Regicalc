@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import net.zuuno.regicalc.presentation.calculator.components.CalculatorAction
+import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 
 class CalculatorViewModel : ViewModel() {
