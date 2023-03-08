@@ -22,6 +22,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.DoubleZero -> enterDoubleZero()
             is CalculatorAction.Operation -> enterOperation(action.operation)
             is CalculatorAction.Clear -> performClear()
+            is CalculatorAction.Delete -> performDeletion()
         }
     }
 
@@ -79,5 +80,14 @@ class CalculatorViewModel : ViewModel() {
 
     private fun performClear() {
         uiState = CalculatorUiState()
+    }
+
+    private fun performDeletion() {
+        uiState = when {
+            uiState.quantity.isNotBlank() -> uiState.copy(quantity = uiState.quantity.dropLast(1))
+            uiState.operation != null -> uiState.copy(operation = null)
+            uiState.price.isNotBlank() -> uiState.copy(price = uiState.price.dropLast(1))
+            else -> uiState
+        }
     }
 }

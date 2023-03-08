@@ -78,7 +78,9 @@ fun CalculatorKeypad(
             ),
             Button(
                 content = CalculatorButtonContent.IconContent(Icons.Default.Backspace),
-                onClick = { /*TODO*/ },
+                onClick = {
+                    onAction(CalculatorAction.Delete)
+                },
                 buttonStyle = CalculatorButtonStyle.SecondaryColor
             )
         ),
@@ -104,7 +106,7 @@ fun CalculatorKeypad(
             Button(
                 content = CalculatorButtonContent.TextContent("×"),
                 onClick = {
-                          onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
+                    onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
                 },
                 buttonStyle = CalculatorButtonStyle.SecondaryColor
             )
