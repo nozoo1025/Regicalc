@@ -79,14 +79,6 @@ class CalculatorViewModel : ViewModel() {
             }
             else -> uiState
         }
-
-//        uiState = when {
-//            uiState.operation == null && !uiState.number1.contains(".") && uiState.number1.isNotBlank() -> uiState.copy(
-//                number1 = "${uiState.number1}."
-//            )
-//            !uiState.number2.contains(".") && uiState.number2.isNotBlank() -> uiState.copy(number2 = "${uiState.number2}.")
-//            else -> uiState
-//        }
     }
 
     private fun performClear() {
