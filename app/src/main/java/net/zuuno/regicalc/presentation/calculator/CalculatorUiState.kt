@@ -17,7 +17,6 @@ fun CalculatorUiState.isQuantityInput(): Boolean {
     return operation != null
 }
 
-
 fun CalculatorUiState.isInputValid(): Boolean {
     return when {
         isPriceInput() -> price.length < MAX_NUMBER_LENGTH
