@@ -6,7 +6,7 @@ data class Shopping(
     val id: String,
     val price: Double,
     val quantity: Int,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now()
 )
 
 fun Shopping.totalPrice(): Double {

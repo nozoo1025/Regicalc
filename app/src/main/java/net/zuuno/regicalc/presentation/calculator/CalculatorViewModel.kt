@@ -8,7 +8,6 @@ import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 import net.zuuno.regicalc.presentation.calculator.util.Shopping
 import net.zuuno.regicalc.presentation.calculator.util.totalPrice
-import java.time.LocalDateTime
 import java.util.*
 
 class CalculatorViewModel : ViewModel() {
@@ -94,8 +93,7 @@ class CalculatorViewModel : ViewModel() {
         val newShopping = Shopping(
             id = UUID.randomUUID().toString(),
             price = uiState.price.toDoubleOrNull() ?: 0.0,
-            quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1,
-            createdAt = LocalDateTime.now()
+            quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1
         )
 
         uiState = uiState.copy(
