@@ -12,12 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 import net.zuuno.regicalc.presentation.calculator.util.Shopping
 
 @Composable
 fun CalculatorShoppingItem(
     shopping: Shopping,
+    onAction: (CalculatorAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -33,7 +35,10 @@ fun CalculatorShoppingItem(
         Row(
             verticalAlignment = Alignment.Bottom
         ) {
-            // TODO: Calculator Chip
+            TaxRateChips(
+                shopping = shopping,
+                onAction = onAction
+            )
         }
         Row(
             verticalAlignment = Alignment.Bottom

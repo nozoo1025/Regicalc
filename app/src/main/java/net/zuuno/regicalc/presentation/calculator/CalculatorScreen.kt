@@ -27,6 +27,9 @@ fun CalculatorScreen() {
         )
         CalculatorShoppingList(
             shoppingList = viewModel.uiState.shoppingList,
+            onAction = { action ->
+                viewModel.onAction(action)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
