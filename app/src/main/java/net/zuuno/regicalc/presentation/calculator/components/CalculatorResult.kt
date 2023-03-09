@@ -2,8 +2,10 @@ package net.zuuno.regicalc.presentation.calculator.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CurrencyYen
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,27 +23,16 @@ fun CalculatorResult(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            verticalAlignment = Alignment.Bottom
-        ) {
-            Text(
-                text = "合計",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.titleLarge
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(
-                text = "(税込)",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-        Row {
-            Text(
-                text = "¥ $totalPrice",
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.displayMedium
-            )
-        }
+        Icon(
+            imageVector = Icons.Default.CurrencyYen,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.size(32.dp)
+        )
+        Text(
+            text = "%,d".format(totalPrice),
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.displayMedium
+        )
     }
 }
