@@ -22,7 +22,9 @@ private sealed class CalculatorButtonContent {
 private data class Button(
     val content: CalculatorButtonContent,
     val onClick: () -> Unit,
-    val buttonStyle: CalculatorButtonStyle = CalculatorButtonStyle.DefaultColor
+    val buttonStyle: CalculatorButtonStyle = CalculatorButtonStyle.DefaultColor,
+    val aspectRatio: Float = 1f,
+    val weight: Float = 1f
 )
 
 @Composable
@@ -117,18 +119,14 @@ fun CalculatorKeypad(
                 content = CalculatorButtonContent.TextContent("0"),
                 onClick = {
                     onAction(CalculatorAction.Number(0))
-                }
+                },
+                aspectRatio = 2f,
+                weight = 2f
             ),
             Button(
                 content = CalculatorButtonContent.TextContent("00"),
                 onClick = {
                     onAction(CalculatorAction.DoubleZero)
-                }
-            ),
-            Button(
-                content = CalculatorButtonContent.TextContent("."),
-                onClick = {
-                    onAction(CalculatorAction.Decimal)
                 }
             ),
             Button(
@@ -173,8 +171,8 @@ fun CalculatorKeypad(
                         },
                         onClick = button.onClick,
                         modifier = Modifier
-                            .aspectRatio(1f)
-                            .weight(1f),
+                            .aspectRatio(button.aspectRatio)
+                            .weight(button.weight),
                         buttonStyle = button.buttonStyle
                     )
                 }

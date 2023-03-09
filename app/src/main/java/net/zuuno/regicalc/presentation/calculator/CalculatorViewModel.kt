@@ -21,7 +21,6 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Number -> enterNumber(action.value)
             is CalculatorAction.DoubleZero -> enterDoubleZero()
             is CalculatorAction.Operation -> enterOperation(action.operation)
-            is CalculatorAction.Decimal -> enterDecimal()
             is CalculatorAction.Add -> performAddition()
             is CalculatorAction.Clear -> performClear()
             is CalculatorAction.Delete -> performDeletion()
@@ -61,26 +60,6 @@ class CalculatorViewModel : ViewModel() {
         }
 
         uiState = uiState.copy(operation = operation)
-    }
-
-    private fun enterDecimal() {
-        if (!uiState.isInputValid()) {
-            return
-        }
-
-        uiState = when {
-            uiState.isPriceInput() && !uiState.price.contains(".") && uiState.price.isNotBlank() -> {
-                uiState.copy(
-                    price = "${uiState.price}."
-                )
-            }
-            uiState.isQuantityInput() && !uiState.quantity.contains(".") && uiState.quantity.isNotBlank() -> {
-                uiState.copy(
-                    quantity = "${uiState.quantity}."
-                )
-            }
-            else -> uiState
-        }
     }
 
     private fun performAddition() {
