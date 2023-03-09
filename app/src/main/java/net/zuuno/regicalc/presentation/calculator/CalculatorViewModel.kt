@@ -136,10 +136,10 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    private fun performSelection(shoppingId: String) {
-        val selectedShoppingItemId = uiState.shoppingList.find { it.selected }?.id
+    private fun performSelection(selectedItemId: String) {
+        val currentSelectedItemId = uiState.shoppingList.find { it.selected }?.id
 
-        val shoppingList = if (selectedShoppingItemId == shoppingId) {
+        val updatedShoppingList = if (currentSelectedItemId == selectedItemId) {
             uiState.shoppingList.map {
                 it.copy(selected = false)
             }
@@ -149,7 +149,7 @@ class CalculatorViewModel : ViewModel() {
                     it.copy(selected = false)
                 }
                 .map {
-                    if (it.id == shoppingId) {
+                    if (it.id == selectedItemId) {
                         it.copy(selected = true)
                     } else {
                         it
