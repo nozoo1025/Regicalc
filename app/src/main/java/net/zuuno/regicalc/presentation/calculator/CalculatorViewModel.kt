@@ -12,6 +12,11 @@ class CalculatorViewModel : ViewModel() {
     var uiState by mutableStateOf(CalculatorUiState())
         private set
 
+    private var _deletedUiState: CalculatorUiState? = null
+    val deletedUiState: CalculatorUiState?
+        get() = _deletedUiState
+
+
     companion object {
         const val MAX_NUMBER_LENGTH = 8
     }
@@ -25,6 +30,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Clear -> performClear()
             is CalculatorAction.Delete -> performDeletion()
             is CalculatorAction.SetTaxRate -> setTaxRate(action.taxRate, action.shoppingId)
+            is CalculatorAction.Undo -> performUndo()
         }
     }
 
@@ -84,6 +90,13 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun performClear() {
+        _deletedUiState = null
+
+        if (uiState == CalculatorUiState()) {
+            return
+        }
+
+        _deletedUiState = uiState
         uiState = CalculatorUiState()
     }
 
@@ -113,5 +126,12 @@ class CalculatorViewModel : ViewModel() {
             shoppingList = shoppingList,
             totalPrice = shoppingList.calculateTotalPrice()
         )
+    }
+
+    private fun performUndo() {
+        _deletedUiState?.let {
+            uiState = it
+            _deletedUiState = null
+        }
     }
 }

@@ -8,4 +8,5 @@ sealed interface CalculatorAction {
     object Clear : CalculatorAction
     object Delete : CalculatorAction
     data class SetTaxRate(val taxRate: TaxRate, val shoppingId: String) : CalculatorAction
+    object Undo : CalculatorAction
 }
