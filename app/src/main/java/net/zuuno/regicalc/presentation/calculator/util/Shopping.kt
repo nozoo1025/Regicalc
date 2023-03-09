@@ -11,5 +11,14 @@ data class Shopping(
 )
 
 fun Shopping.totalPrice(): Int {
-    return( price * quantity * (1 + taxRate.rate)).toInt()
+    return price * quantity
+}
+
+fun List<Shopping>.calculateTotalPrice(): Int {
+    return this
+        .groupBy { it.taxRate }
+        .map { (taxRate, shoppingList) ->
+            (shoppingList.sumOf { it.totalPrice() } * (1 + taxRate.rate)).toInt()
+        }
+        .sum()
 }

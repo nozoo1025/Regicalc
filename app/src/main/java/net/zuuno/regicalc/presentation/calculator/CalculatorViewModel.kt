@@ -100,7 +100,7 @@ class CalculatorViewModel : ViewModel() {
             quantity = "",
             operation = null,
             shoppingList = (uiState.shoppingList + newShopping).sortedByDescending { it.createdAt },
-            totalPrice = (uiState.shoppingList + newShopping).sumOf { it.totalPrice() }
+            totalPrice = (uiState.shoppingList + newShopping).calculateTotalPrice()
         )
     }
 
@@ -129,9 +129,10 @@ class CalculatorViewModel : ViewModel() {
                 it
             }
         }
+
         uiState = uiState.copy(
             shoppingList = shoppingList,
-            totalPrice = shoppingList.sumOf { it.totalPrice() }
+            totalPrice = shoppingList.calculateTotalPrice()
         )
     }
 }
