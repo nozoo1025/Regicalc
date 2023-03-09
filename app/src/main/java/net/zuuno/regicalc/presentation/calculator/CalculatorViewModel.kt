@@ -90,7 +90,7 @@ class CalculatorViewModel : ViewModel() {
 
         val newShopping = Shopping(
             id = UUID.randomUUID().toString(),
-            price = uiState.price.toDoubleOrNull() ?: 0.0,
+            price = uiState.price.toIntOrNull() ?: 0,
             quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1,
             taxRate = uiState.shoppingList.maxByOrNull { it.createdAt }?.taxRate ?: TaxRate.Default
         )

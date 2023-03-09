@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CalculatorResult(
-    totalPrice: Double,
+    totalPrice: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -38,7 +38,7 @@ fun CalculatorResult(
         }
         Row {
             Text(
-                text = "¥ ${"%.1f".format(totalPrice)}",
+                text = "¥ $totalPrice",
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.displayMedium
             )

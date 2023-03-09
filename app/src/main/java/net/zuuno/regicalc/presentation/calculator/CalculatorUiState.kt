@@ -8,7 +8,7 @@ data class CalculatorUiState(
     val price: String = "",
     val quantity: String = "",
     val operation: CalculatorOperation? = null,
-    val totalPrice: Double = 0.0,
+    val totalPrice: Int = 0,
     val shoppingList: List<Shopping> = emptyList()
 )
 

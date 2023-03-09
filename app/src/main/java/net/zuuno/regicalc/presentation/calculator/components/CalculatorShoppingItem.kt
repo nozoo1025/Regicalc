@@ -45,7 +45,7 @@ fun CalculatorShoppingItem(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
-                    text = "%.1f".format(shopping.price),
+                    text = "${shopping.price}",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.headlineMedium
                 )
@@ -63,7 +63,7 @@ fun CalculatorShoppingItem(
                 )
             }
             Text(
-                text = "= ${"%.1f".format(shopping.totalPrice())}",
+                text = "= ${shopping.totalPrice()}",
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.titleMedium
             )
