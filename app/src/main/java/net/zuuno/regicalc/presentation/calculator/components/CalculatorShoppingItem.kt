@@ -28,7 +28,7 @@ fun CalculatorShoppingItem(
             }
             .background(
                 color = if (shopping.selected) {
-                    MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+                    MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
                 } else {
                     MaterialTheme.colorScheme.surface
                 },
