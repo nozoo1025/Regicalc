@@ -31,6 +31,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Delete -> performDeletion()
             is CalculatorAction.SetTaxRate -> setTaxRate(action.taxRate, action.shoppingId)
             is CalculatorAction.Undo -> performUndo()
+            is CalculatorAction.Select -> performSelection(action.shoppingId)
         }
     }
 
@@ -133,5 +134,32 @@ class CalculatorViewModel : ViewModel() {
             uiState = it
             _deletedUiState = null
         }
+    }
+
+    private fun performSelection(shoppingId: String) {
+        val selectedShoppingItemId = uiState.shoppingList.find { it.selected }?.id
+
+        val shoppingList = if (selectedShoppingItemId == shoppingId) {
+            uiState.shoppingList.map {
+                it.copy(selected = false)
+            }
+        } else {
+            uiState.shoppingList
+                .map {
+                    it.copy(selected = false)
+                }
+                .map {
+                    if (it.id == shoppingId) {
+                        it.copy(selected = true)
+                    } else {
+                        it
+                    }
+                }
+        }
+
+        uiState = uiState.copy(
+            shoppingList = shoppingList,
+            totalPrice = shoppingList.calculateTotalPrice()
+        )
     }
 }

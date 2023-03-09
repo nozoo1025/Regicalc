@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +23,15 @@ fun CalculatorShoppingItem(
 ) {
     Row(
         modifier = Modifier
-            .clickable { /*TODO*/ }
+            .clickable {
+                onAction(CalculatorAction.Select(shopping.id))
+            }
             .background(
-                color = MaterialTheme.colorScheme.surface,
+                color = if (shopping.selected) {
+                    MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
+                } else {
+                    MaterialTheme.colorScheme.surface
+                },
             )
             .then(modifier),
         horizontalArrangement = Arrangement.SpaceBetween,

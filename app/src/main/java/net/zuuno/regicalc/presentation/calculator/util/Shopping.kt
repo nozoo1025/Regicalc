@@ -7,7 +7,8 @@ data class Shopping(
     val price: Int,
     val quantity: Int,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val taxRate: TaxRate = TaxRate.Default
+    val taxRate: TaxRate = TaxRate.Default,
+    val selected: Boolean = false
 )
 
 fun Shopping.totalPrice(): Int {
