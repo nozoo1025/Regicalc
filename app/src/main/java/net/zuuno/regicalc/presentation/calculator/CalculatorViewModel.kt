@@ -157,9 +157,14 @@ class CalculatorViewModel : ViewModel() {
                 }
         }
 
+        val selectedShoppingItem = updatedShoppingList.find { it.selected }
+
         uiState = uiState.copy(
-            shoppingList = shoppingList,
-            totalPrice = shoppingList.calculateTotalPrice()
+            price = selectedShoppingItem?.price?.toString().orEmpty(),
+            quantity = selectedShoppingItem?.quantity?.toString().orEmpty(),
+            operation = selectedShoppingItem?.let { CalculatorOperation.Multiply },
+            shoppingList = updatedShoppingList,
+            totalPrice = updatedShoppingList.calculateTotalPrice()
         )
     }
 }
