@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.zuuno.regicalc.presentation.calculator.util.CalculatorAction
@@ -16,9 +18,12 @@ fun CalculatorShoppingList(
     onAction: (CalculatorAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val lazyListState = rememberLazyListState()
+
     LazyColumn(
         modifier = modifier,
-        reverseLayout = true
+        reverseLayout = true,
+        state = lazyListState
     ) {
         items(
             items = shoppingList,
@@ -35,5 +40,9 @@ fun CalculatorShoppingList(
                     )
             )
         }
+    }
+
+    LaunchedEffect(shoppingList.size) {
+        lazyListState.animateScrollToItem(0)
     }
 }
