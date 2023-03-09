@@ -74,20 +74,50 @@ class CalculatorViewModel : ViewModel() {
             return
         }
 
-        val newShopping = Shopping(
-            id = UUID.randomUUID().toString(),
-            price = uiState.price.toIntOrNull() ?: 0,
-            quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1,
-            taxRate = uiState.shoppingList.maxByOrNull { it.createdAt }?.taxRate ?: TaxRate.Default
-        )
+        val selectedShoppingItem = uiState.shoppingList.find { it.selected }
+        if (selectedShoppingItem == null) {
+            val newShopping = Shopping(
+                id = UUID.randomUUID().toString(),
+                price = uiState.price.toIntOrNull() ?: 0,
+                quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull()
+                    ?: 1,
+                taxRate = uiState.shoppingList.maxByOrNull { it.createdAt }?.taxRate
+                    ?: TaxRate.Default
+            )
 
-        uiState = uiState.copy(
-            price = "",
-            quantity = "",
-            operation = null,
-            shoppingList = (uiState.shoppingList + newShopping).sortedByDescending { it.createdAt },
-            totalPrice = (uiState.shoppingList + newShopping).calculateTotalPrice()
-        )
+            uiState = uiState.copy(
+                price = "",
+                quantity = "",
+                operation = null,
+                shoppingList = (uiState.shoppingList + newShopping).sortedByDescending { it.createdAt },
+                totalPrice = (uiState.shoppingList + newShopping).calculateTotalPrice()
+            )
+        } else {
+            val updatedShoppingList = uiState.shoppingList
+                .map {
+                    it.copy(
+                        selected = false
+                    )
+                }
+                .map {
+                    if (it.id == selectedShoppingItem.id) {
+                        it.copy(
+                            price = uiState.price.toIntOrNull() ?: 0,
+                            quantity = if (uiState.operation == null) 1 else uiState.quantity.toIntOrNull() ?: 1
+                        )
+                    } else {
+                        it
+                    }
+                }
+
+            uiState = uiState.copy(
+                price = "",
+                quantity = "",
+                operation = null,
+                shoppingList = updatedShoppingList.sortedByDescending { it.createdAt },
+                totalPrice = updatedShoppingList.calculateTotalPrice()
+            )
+        }
     }
 
     private fun performClear() {
