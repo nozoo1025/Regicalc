@@ -8,7 +8,7 @@ import net.zuuno.regicalc.presentation.calculator.util.CalculatorOperation
 import org.junit.Before
 import org.junit.Test
 
-class EnterOperation {
+class EnterOperationTest {
 
     private lateinit var viewModel: CalculatorViewModel
 
